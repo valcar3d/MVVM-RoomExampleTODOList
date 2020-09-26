@@ -4,8 +4,8 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
 
-    <color name="highPriority">#FF5252</color>
-    <color name="mediumPriotity">#FFD180</color>
-    <color name="lowPriotity">#CCFF90</color>
+    <color name="highPriority">#EF5350</color>
+    <color name="mediumPriotity">#FFA726</color>
+    <color name="lowPriotity">#AED581</color>
 
 </resources>

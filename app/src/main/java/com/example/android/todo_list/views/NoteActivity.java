@@ -1,31 +1,29 @@
-package com.example.android.todo_list;
+package com.example.android.todo_list.views;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.text.style.BackgroundColorSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.android.todo_list.R;
 import com.example.android.todo_list.adapters.NoteAdapter;
 import com.example.android.todo_list.databinding.ActivityNoteBinding;
 import com.example.android.todo_list.entity.Note;
-import com.example.android.todo_list.viewmodel.NoteViewModel;
+import com.example.android.todo_list.viewmodels.NoteViewModel;
 
 import java.util.List;
 
@@ -52,7 +50,6 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
         noteAdapter = new NoteAdapter();
         binding.noteActivityRecyclerView.setAdapter(noteAdapter);
 
-        //TODO check swipe functionality
         //region callback for swipes
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
             @Override

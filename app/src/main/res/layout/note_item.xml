@@ -4,7 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
             name="noteModel"
             type="com.example.android.todo_list.entity.Note" />

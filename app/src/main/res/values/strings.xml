@@ -5,4 +5,6 @@
     <string name="txtNoteNotSaved">Note not saved</string>
     <string name="txtNoteDeleted">Note Deleted</string>
     <string name="txtAllNotesDeleted">All notes where deleted</string>
+    <string name="newUser"><u>New user</u></string>
+    <string name="forgotPassword"><u>¿Forgot password?</u></string>
 </resources>
