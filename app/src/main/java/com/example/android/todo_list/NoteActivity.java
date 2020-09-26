@@ -18,17 +18,15 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.android.todo_list.adapters.NoteAdapter;
+import com.example.android.todo_list.databinding.ActivityNoteBinding;
 import com.example.android.todo_list.entity.Note;
 import com.example.android.todo_list.viewmodel.NoteViewModel;
-import com.example.android.todo_list.databinding.ActivityNoteBinding;
-
 
 import java.util.List;
 
 public class NoteActivity extends AppCompatActivity implements View.OnClickListener, NoteAdapter.onItemClickListener {
 
     NoteViewModel noteViewModel;
-    RecyclerView recyclerView;
     NoteAdapter noteAdapter;
     FloatingActionButton floatingActionButton;
     private ActivityNoteBinding binding;
@@ -40,10 +38,8 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         binding = DataBindingUtil.setContentView(this, R.layout.activity_note);
         floatingActionButton = findViewById(R.id.noteActivity_floatingButton);
-
 
         binding.noteActivityRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.noteActivityRecyclerView.setHasFixedSize(true);
@@ -51,6 +47,7 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
         noteAdapter = new NoteAdapter();
         binding.noteActivityRecyclerView.setAdapter(noteAdapter);
 
+        //TODO check swipe functionality
         //region callback for swipes
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
             @Override
@@ -64,7 +61,7 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
                 noteViewModel.delete(noteAdapter.getNoteAt(viewHolder.getAdapterPosition()));
                 Toast.makeText(NoteActivity.this, R.string.txtNoteDeleted, Toast.LENGTH_SHORT).show();
             }
-        }).attachToRecyclerView(recyclerView);
+        }).attachToRecyclerView(binding.noteActivityRecyclerView);
         //endregion
 
         noteViewModel = ViewModelProviders.of(this).get(NoteViewModel.class);
@@ -76,8 +73,9 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+
         floatingActionButton.setOnClickListener(this);
-        //noteAdapter.setOnClickRecyclerview(this);
+        noteAdapter.setOnClickRecyclerview(this);
     }
 
     //region menu configurations
@@ -134,7 +132,6 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(this, R.string.txtNoteNotSaved, Toast.LENGTH_SHORT).show();
         }
     }
-
 
     //Listener from the Adapter to check which item was selected and send to
     //edit note activity

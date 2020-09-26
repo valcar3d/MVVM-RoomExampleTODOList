@@ -7,16 +7,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import com.example.android.todo_list.R;
+import com.example.android.todo_list.databinding.NoteItemBinding;
 import com.example.android.todo_list.entity.Note;
 
 
 public class NoteAdapter extends ListAdapter<Note, NoteAdapter.ViewHolder> {
 
     //DiffUtil algoritm implementation
-    //region diff util
+    //region diffUtil
     public NoteAdapter() {
         super(DIFF_CALLBACK);
     }
@@ -55,17 +54,17 @@ public class NoteAdapter extends ListAdapter<Note, NoteAdapter.ViewHolder> {
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
-        View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.note_item, parent, false);
-        return new ViewHolder(itemView);
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        NoteItemBinding noteItemBinding = NoteItemBinding.inflate(layoutInflater, parent, false);
+        return new ViewHolder(noteItemBinding);
+
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         Note currentNote = getItem(i);
-        viewHolder.title.setText(currentNote.getTitle());
-        viewHolder.description.setText(currentNote.getDescription());
-        viewHolder.priority.setText(String.valueOf(currentNote.getPriority()));
+        viewHolder.noteItemBinding.setNoteModel(currentNote);
+        viewHolder.noteItemBinding.executePendingBindings();//instantaneous binding to current user
     }
 
     public Note getNoteAt(int position) {
@@ -74,20 +73,13 @@ public class NoteAdapter extends ListAdapter<Note, NoteAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView title;
-        TextView description;
-        TextView priority;
+        NoteItemBinding noteItemBinding;
 
+        public ViewHolder(@NonNull NoteItemBinding noteItemBinding) {
+            super(noteItemBinding.getRoot());
+            this.noteItemBinding = noteItemBinding;
 
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            title = itemView.findViewById(R.id.note_item_title);
-            description = itemView.findViewById(R.id.note_item_description);
-            priority = itemView.findViewById(R.id.note_item_priority);
-
-
-            itemView.setOnClickListener(new View.OnClickListener() {
+            noteItemBinding.rvContainer.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     int position = getAdapterPosition();
