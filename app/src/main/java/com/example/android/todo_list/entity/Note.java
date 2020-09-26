@@ -13,8 +13,7 @@ public class Note {
     int priority;
     private int image;
 
-
-    //Extra constructor to allow new implementations of the notes icons
+    //constructor to allow new implementations of the notes icons
     //we can fetch them from anywhere not only from the resources
     public Note(String title, String description, int priority, int image) {
         this.title = title;

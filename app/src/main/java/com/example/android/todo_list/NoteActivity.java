@@ -5,14 +5,17 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.text.style.BackgroundColorSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -98,6 +101,7 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
     }
     //endregion
 
+    //Add note activity with an activity result of ADD_REQUEST
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -113,6 +117,7 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
         super.onActivityResult(requestCode, resultCode, data);
 
         //icon can be fetched from anyplace, internet, locally.
+        //this is here just for demonstrations purposes
         int note_icon = R.drawable.notepad;
 
         if (requestCode == ADD_REQUEST && resultCode == RESULT_OK) {
@@ -141,7 +146,7 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     //Listener from the Adapter to check which item was selected and send to
-    //edit note activity
+    //Edit note activity with an activity result of EDIT_REQUEST
     @Override
     public void onRecyclerViewItemSelected(Note note) {
         Intent intent = new Intent(NoteActivity.this, AddEditNoteActivity.class);
@@ -152,9 +157,13 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
         startActivityForResult(intent, EDIT_REQUEST);
     }
 
+    //Binding for ImageView src from the note_item.xml
     @BindingAdapter({"android:src"})
     public static void setImageViewResource(ImageView imageView, int resource) {
         imageView.setImageResource(resource);
     }
 
+
 }
+
+
