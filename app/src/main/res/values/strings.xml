@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">TODO list</string>
+    <string name="txtNoteSaved">Note saved</string>
+    <string name="txtNoteUpdated">Note Updated</string>
+    <string name="txtNoteNotSaved">Note not saved</string>
+    <string name="txtNoteDeleted">Note Deleted</string>
+    <string name="txtAllNotesDeleted">All notes where deleted</string>
+</resources>
