@@ -1,13 +1,14 @@
-package com.example.android.todo_list.Screens.Repository;
+package com.example.android.todo_list.repository;
 
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
 
-import com.example.android.todo_list.Screens.Database.Dao.NoteDao;
-import com.example.android.todo_list.Screens.Database.NoteDatabase;
-import com.example.android.todo_list.Screens.Entity.Note;
+
+import com.example.android.todo_list.database.dao.NoteDao;
+import com.example.android.todo_list.database.NoteDatabase;
+import com.example.android.todo_list.entity.Note;
 
 import java.util.List;
 

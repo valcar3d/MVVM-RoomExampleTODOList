@@ -1,20 +1,20 @@
-package com.example.android.todo_list.Screens.ViewModel;
+package com.example.android.todo_list.viewmodel;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.ViewModel;
 import android.support.annotation.NonNull;
 
-import com.example.android.todo_list.Screens.Entity.Note;
-import com.example.android.todo_list.Screens.Repository.NoteRepository;
+
+import com.example.android.todo_list.entity.Note;
+import com.example.android.todo_list.repository.NoteRepository;
 
 import java.util.List;
 
 public class NoteViewModel extends AndroidViewModel {
 
     private NoteRepository noteRepository;
-    private LiveData<List<Note>> allNotes;
+private LiveData<List<Note>> allNotes;
 
     public NoteViewModel(@NonNull Application application) {
         super(application);

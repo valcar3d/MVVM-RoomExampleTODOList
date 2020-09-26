@@ -1,4 +1,4 @@
-package com.example.android.todo_list.Screens.Adapters;
+package com.example.android.todo_list.adapters;
 
 import android.support.annotation.NonNull;
 import android.support.v7.recyclerview.extensions.ListAdapter;
@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.android.todo_list.R;
-import com.example.android.todo_list.Screens.Entity.Note;
+import com.example.android.todo_list.entity.Note;
 
 
 public class NoteAdapter extends ListAdapter<Note, NoteAdapter.ViewHolder> {
@@ -85,7 +85,8 @@ public class NoteAdapter extends ListAdapter<Note, NoteAdapter.ViewHolder> {
             title = itemView.findViewById(R.id.note_item_title);
             description = itemView.findViewById(R.id.note_item_description);
             priority = itemView.findViewById(R.id.note_item_priority);
-            
+
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

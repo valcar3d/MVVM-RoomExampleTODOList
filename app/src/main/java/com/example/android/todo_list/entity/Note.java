@@ -1,4 +1,4 @@
-package com.example.android.todo_list.Screens.Entity;
+package com.example.android.todo_list.entity;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
@@ -8,8 +8,8 @@ public class Note {
 
     @PrimaryKey(autoGenerate = true)
     int id;
-    public String title;
-    public String description;
+    private String title;
+    private String description;
     int priority;
 
     public Note(String title, String description, int priority) {

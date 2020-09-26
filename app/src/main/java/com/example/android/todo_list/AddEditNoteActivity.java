@@ -1,4 +1,4 @@
-package com.example.android.todo_list.Screens;
+package com.example.android.todo_list;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;

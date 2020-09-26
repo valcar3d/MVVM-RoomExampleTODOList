@@ -1,8 +1,9 @@
-package com.example.android.todo_list.Screens;
+package com.example.android.todo_list;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,10 +17,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.android.todo_list.R;
-import com.example.android.todo_list.Screens.Adapters.NoteAdapter;
-import com.example.android.todo_list.Screens.Entity.Note;
-import com.example.android.todo_list.Screens.ViewModel.NoteViewModel;
+import com.example.android.todo_list.adapters.NoteAdapter;
+import com.example.android.todo_list.entity.Note;
+import com.example.android.todo_list.viewmodel.NoteViewModel;
+import com.example.android.todo_list.databinding.ActivityNoteBinding;
+
 
 import java.util.List;
 
@@ -29,6 +31,7 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
     RecyclerView recyclerView;
     NoteAdapter noteAdapter;
     FloatingActionButton floatingActionButton;
+    private ActivityNoteBinding binding;
 
     public static final int ADD_REQUEST = 1;
     public static final int EDIT_REQUEST = 2;
@@ -36,16 +39,17 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_note);
 
+
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_note);
         floatingActionButton = findViewById(R.id.noteActivity_floatingButton);
-        recyclerView = findViewById(R.id.noteActivity_recyclerView);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setHasFixedSize(true);
+
+        binding.noteActivityRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        binding.noteActivityRecyclerView.setHasFixedSize(true);
 
         noteAdapter = new NoteAdapter();
-        recyclerView.setAdapter(noteAdapter);
+        binding.noteActivityRecyclerView.setAdapter(noteAdapter);
 
         //region callback for swipes
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
@@ -73,7 +77,7 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
         });
 
         floatingActionButton.setOnClickListener(this);
-        noteAdapter.setOnClickRecyclerview(this);
+        //noteAdapter.setOnClickRecyclerview(this);
     }
 
     //region menu configurations
@@ -130,6 +134,7 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(this, R.string.txtNoteNotSaved, Toast.LENGTH_SHORT).show();
         }
     }
+
 
     //Listener from the Adapter to check which item was selected and send to
     //edit note activity

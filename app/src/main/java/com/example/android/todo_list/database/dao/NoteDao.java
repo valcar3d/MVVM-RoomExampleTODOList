@@ -1,4 +1,4 @@
-package com.example.android.todo_list.Screens.Database.Dao;
+package com.example.android.todo_list.database.dao;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
@@ -7,7 +7,7 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
-import com.example.android.todo_list.Screens.Entity.Note;
+import com.example.android.todo_list.entity.Note;
 
 import java.util.List;
 
