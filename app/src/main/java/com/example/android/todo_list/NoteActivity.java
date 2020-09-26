@@ -3,6 +3,7 @@ package com.example.android.todo_list;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,6 +16,7 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.android.todo_list.adapters.NoteAdapter;
@@ -109,12 +111,16 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        //icon can be fetched from anyplace, internet, locally.
+        int note_icon = R.drawable.notepad;
+
         if (requestCode == ADD_REQUEST && resultCode == RESULT_OK) {
             String note_title = data.getStringExtra("note_title");
             String note_description = data.getStringExtra("note_description");
             int note_priority = data.getIntExtra("note_priority", 0);
 
-            noteViewModel.insert(new Note(note_title, note_description, note_priority));
+            noteViewModel.insert(new Note(note_title, note_description, note_priority, note_icon));
 
             Toast.makeText(this, R.string.txtNoteSaved, Toast.LENGTH_SHORT).show();
         } else if (requestCode == EDIT_REQUEST && resultCode == RESULT_OK) {
@@ -123,7 +129,8 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
             int note_priority = data.getIntExtra("note_priority", 0);
             int note_id = data.getIntExtra("id", 0);
 
-            Note note = new Note(note_title, note_description, note_priority);
+
+            Note note = new Note(note_title, note_description, note_priority, note_icon);
             note.setId(note_id);
             noteViewModel.update(note);
 
@@ -144,4 +151,10 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
         intent.putExtra("priority", note.getPriority());
         startActivityForResult(intent, EDIT_REQUEST);
     }
+
+    @BindingAdapter({"android:src"})
+    public static void setImageViewResource(ImageView imageView, int resource) {
+        imageView.setImageResource(resource);
+    }
+
 }
