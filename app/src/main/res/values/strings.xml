@@ -7,4 +7,5 @@
     <string name="txtAllNotesDeleted">All notes where deleted</string>
     <string name="newUser"><u>New user</u></string>
     <string name="forgotPassword"><u>¿Forgot password?</u></string>
+    <string name="instructions">write in email and password and touch \"new user\" to create new account</string>
 </resources>

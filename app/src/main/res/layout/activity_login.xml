@@ -12,7 +12,7 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/holo_blue_dark">
+        android:background="@color/material_blue_grey_90">
 
 
         <ImageView
@@ -34,6 +34,8 @@
             android:ems="10"
             android:hint="email"
             android:inputType="textEmailAddress"
+            android:textColor="@color/button_text_color"
+            android:textColorHint="@color/blue_btn_bg_pressed_color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -47,6 +49,8 @@
             android:ems="10"
             android:hint="password"
             android:inputType="textPassword"
+            android:textColor="@color/button_text_color"
+            android:textColorHint="@color/blue_btn_bg_pressed_color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/username" />
@@ -64,13 +68,14 @@
         <TextView
             android:id="@+id/signup"
             android:layout_width="wrap_content"
+
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
+            android:layout_marginEnd="72dp"
             android:onClick="@{(v) -> ClickListener.onClickSignUp(v)}"
             android:text="@string/newUser"
+            android:textColor="@color/button_text_color"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.751"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/password" />
 
         <Button
@@ -79,8 +84,10 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
+            android:background="@drawable/disabled_button"
             android:onClick="@{(v) -> ClickListener.onClickLogin(v)}"
             android:text="Login"
+            android:textColor="@color/blue_btn_bg_pressed_color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -89,14 +96,30 @@
 
         <TextView
             android:id="@+id/textView2"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/forgotPassword"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:text="@string/instructions"
+            android:textColor="@color/gray_btn_bg_pressed_color"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/login"
             app:layout_constraintVertical_bias="0.7" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="24dp"
+            android:text="Don't have account?"
+            android:textColor="@color/blue_btn_bg_pressed_color"
+            app:layout_constraintEnd_toStartOf="@+id/signup"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/password" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>
