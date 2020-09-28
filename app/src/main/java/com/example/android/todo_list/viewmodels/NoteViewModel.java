@@ -21,7 +21,6 @@ public class NoteViewModel extends AndroidViewModel {
         allNotes = noteRepository.getAllNotes();
     }
 
-
     //region CRUD calls to repository
     public void insert(Note note) {
         noteRepository.insert(note);

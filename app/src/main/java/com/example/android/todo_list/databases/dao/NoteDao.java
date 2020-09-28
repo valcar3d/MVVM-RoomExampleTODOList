@@ -1,4 +1,4 @@
-package com.example.android.todo_list.database.dao;
+package com.example.android.todo_list.databases.dao;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
@@ -28,5 +28,8 @@ public interface NoteDao {
 
     @Query("SELECT * FROM note_table ORDER BY priority DESC")
     LiveData<List<Note>> getAllNotes();
+
+
+
 
 }

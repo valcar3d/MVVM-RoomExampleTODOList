@@ -1,12 +1,18 @@
 package com.example.android.todo_list.entity;
 
+import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
+
 
 @Entity(tableName = "note_table")
 public class Note {
 
     @PrimaryKey(autoGenerate = true)
+    @NonNull
+    @ColumnInfo(name = "noteId")
     int id;
     private String title;
     private String description;
@@ -55,7 +61,7 @@ public class Note {
     public int getId() {
         return id;
     }
-    public void setId(int id) {
+    public void setId(@NonNull int id) {
         this.id = id;
     }
 

@@ -5,8 +5,8 @@
     <data>
 
         <variable
-            name="login"
-            type="com.example.android.todo_list.viewmodels.LoginViewModel" />
+            name="ClickListener"
+            type="com.example.android.todo_list.databinding.Listener" />
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -28,30 +28,28 @@
             app:layout_constraintVertical_bias="0.05" />
 
         <EditText
-            android:id="@+id/txtEmailAddress"
+            android:id="@+id/username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="email"
             android:inputType="textEmailAddress"
-            android:text="@={login.emailAdress}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ivSublogo" />
 
         <EditText
-            android:id="@+id/txtPassword"
+            android:id="@+id/password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:ems="10"
             android:hint="password"
             android:inputType="textPassword"
-            android:text="@={login.password}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtEmailAddress" />
+            app:layout_constraintTop_toBottomOf="@+id/username" />
 
         <ImageView
             android:id="@+id/ivSublogo"
@@ -64,29 +62,29 @@
             app:layout_constraintTop_toBottomOf="@+id/ivMainLogo" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/signup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:onClick="@{(v)->login.onClickNewUser(v)}"
+            android:onClick="@{(v) -> ClickListener.onClickSignUp(v)}"
             android:text="@string/newUser"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.751"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtPassword" />
+            app:layout_constraintTop_toBottomOf="@+id/password" />
 
         <Button
-            android:id="@+id/btnLogin"
+            android:id="@+id/login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
-            android:onClick="@{(v) -> login.onClickLogin(v)}"
+            android:onClick="@{(v) -> ClickListener.onClickLogin(v)}"
             android:text="Login"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/signup"
             app:layout_constraintVertical_bias="0.3" />
 
         <TextView
@@ -94,11 +92,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/forgotPassword"
-            android:onClick="@{(v)->login.onClickForgot(v)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnLogin"
+            app:layout_constraintTop_toBottomOf="@+id/login"
             app:layout_constraintVertical_bias="0.7" />
 
     </android.support.constraint.ConstraintLayout>
