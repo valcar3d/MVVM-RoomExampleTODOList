@@ -11,7 +11,7 @@ import com.example.android.todo_list.entity.UserAccount;
 @Database(entities = {UserAccount.class}, version = 1)
 public abstract class UserAccountDatabase extends RoomDatabase {
 
-    public abstract UserAccountDao userAccountDao();
+    /*public abstract UserAccountDao userAccountDao();
 
     public static UserAccountDatabase INSTANCE;
 
@@ -27,7 +27,7 @@ public abstract class UserAccountDatabase extends RoomDatabase {
 
     public static void destroyInstance() {
         INSTANCE = null;
-    }
+    }*/
 
 }
 

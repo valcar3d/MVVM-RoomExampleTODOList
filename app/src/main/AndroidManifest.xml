@@ -12,22 +12,13 @@
         <activity android:name=".views.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".views.NoteActivity"
-            android:launchMode="singleTop">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".views.AddEditNoteActivity"
-            android:parentActivityName=".views.NoteActivity" />
+        <activity android:name=".views.AddEditNoteActivity" />
+        <activity android:name=".views.NoteActivity"/>
+
     </application>
 
 </manifest>

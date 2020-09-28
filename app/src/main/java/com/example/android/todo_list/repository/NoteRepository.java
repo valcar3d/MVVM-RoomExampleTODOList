@@ -6,6 +6,7 @@ import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
 
 
+import com.example.android.todo_list.databases.AppDatabase;
 import com.example.android.todo_list.databases.dao.NoteDao;
 import com.example.android.todo_list.databases.NoteDatabase;
 import com.example.android.todo_list.entity.Note;
@@ -17,10 +18,11 @@ public class NoteRepository {
     private NoteDao noteDao;
     private LiveData<List<Note>> allNotes;
 
-
     public NoteRepository(Application application) {
-        NoteDatabase noteDatabase = NoteDatabase.getInstance(application);
-        noteDao = noteDatabase.noteDao();
+       /* NoteDatabase noteDatabase = NoteDatabase.getInstance(application);
+        noteDao = noteDatabase.noteDao();*/
+        AppDatabase appDatabase = AppDatabase.getInstance(application);
+        noteDao = appDatabase.noteDao();
         allNotes = noteDao.getAllNotes();
     }
 

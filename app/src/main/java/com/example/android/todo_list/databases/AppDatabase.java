@@ -5,37 +5,39 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
-import com.example.android.todo_list.entity.Note;
 import com.example.android.todo_list.databases.dao.NoteDao;
+import com.example.android.todo_list.databases.dao.UserAccountDao;
+import com.example.android.todo_list.entity.Note;
+import com.example.android.todo_list.entity.UserAccount;
 
 
-@Database(entities = Note.class, version = 1)
-public abstract class NoteDatabase extends RoomDatabase {
+@Database(entities = {Note.class, UserAccount.class}, version = 1)
+public abstract class AppDatabase extends RoomDatabase {
 
-  /*  public static final String NOTE_DATABASE = "note_database";
+    public static final String NOTE_DATABASE = "todo_database";
 
     public abstract NoteDao noteDao();
+    public abstract UserAccountDao userAccountDao();
 
-    private static NoteDatabase instance;
+    private static AppDatabase instance;
 
     //region singleton implementation
     //method to synchronize the thread and get THIS instance of
     // the Database in this way we avoid using the same thread at the same time
 
-    public static synchronized NoteDatabase getInstance(Context context) {
+    public static synchronized AppDatabase getInstance(Context context) {
         if (instance == null) {
-            instance = Room.databaseBuilder(context, NoteDatabase.class, NOTE_DATABASE)
+            instance = Room.databaseBuilder(context, AppDatabase.class, NOTE_DATABASE).allowMainThreadQueries()
                     .fallbackToDestructiveMigration()
                     //.addCallback(roomCallback)
                     .build();
         }
         return instance;
-    }*/
+    }
     //endregion
 
 
-
-    //Create default data for users database
+    //Create default data for ADMIN credentials in database
  /*   private static RoomDatabase.Callback roomCallback = new RoomDatabase.Callback() {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
@@ -54,5 +56,7 @@ public abstract class NoteDatabase extends RoomDatabase {
             return null;
         }
     }*/
+
+
 
 }
