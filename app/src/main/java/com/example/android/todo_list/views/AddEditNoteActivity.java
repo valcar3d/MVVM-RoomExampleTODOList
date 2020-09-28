@@ -21,6 +21,7 @@ public class AddEditNoteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_note);
 
+
         title = findViewById(R.id.addNoteActivity_title);
         description = findViewById(R.id.addNoteActivity_description);
         numberPicker = findViewById(R.id.addNote_numberPacker);

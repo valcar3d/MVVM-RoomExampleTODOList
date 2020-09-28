@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -17,7 +18,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.example.android.todo_list.R;
 import com.example.android.todo_list.adapters.NoteAdapter;
@@ -26,6 +26,8 @@ import com.example.android.todo_list.entity.Note;
 import com.example.android.todo_list.viewmodels.NoteViewModel;
 
 import java.util.List;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class NoteActivity extends AppCompatActivity implements View.OnClickListener, NoteAdapter.onItemClickListener {
 
@@ -37,9 +39,20 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
     public static final int ADD_REQUEST = 1;
     public static final int EDIT_REQUEST = 2;
 
+    Handler handler = new Handler();
+    long timeToHideDialogs = 2000;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Getting users ID and name to further usages
+        Intent extras = getIntent();
+        int userId = extras.getIntExtra("userId", 0);
+        String userName = extras.getStringExtra("userName");
+
+        //Toast.makeText(getApplicationContext(), "Used ID = " + userId + " Name = " + userName, Toast.LENGTH_SHORT).show();
+
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_note);
         floatingActionButton = findViewById(R.id.noteActivity_floatingButton);
@@ -61,7 +74,20 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
                 //get current swipped note and use room delete interface
                 noteViewModel.delete(noteAdapter.getNoteAt(viewHolder.getAdapterPosition()));
-                Toast.makeText(NoteActivity.this, R.string.txtNoteDeleted, Toast.LENGTH_SHORT).show();
+
+                final SweetAlertDialog singleNoteDeleted = new SweetAlertDialog(NoteActivity.this, SweetAlertDialog.WARNING_TYPE);
+                singleNoteDeleted.setTitleText("Note deleted");
+                singleNoteDeleted.setContentText("The note was completely deleted");
+                singleNoteDeleted.hideConfirmButton();
+                singleNoteDeleted.show();
+
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        singleNoteDeleted.dismiss();
+                    }
+                }, timeToHideDialogs);
+
+
             }
         }).attachToRecyclerView(binding.noteActivityRecyclerView);
         //endregion
@@ -80,6 +106,7 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
         noteAdapter.setOnClickRecyclerview(this);
     }
 
+
     //region menu configurations
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -92,7 +119,21 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
         int id = item.getItemId();
         if (id == R.id.notes_delete) {
             noteViewModel.deleteAll();
-            Toast.makeText(NoteActivity.this, R.string.txtAllNotesDeleted, Toast.LENGTH_SHORT).show();
+
+            //SweetAlert New Note Added
+            final SweetAlertDialog allNotesDeleted = new SweetAlertDialog(NoteActivity.this, SweetAlertDialog.WARNING_TYPE);
+            allNotesDeleted.setTitleText("Notes deleted");
+            allNotesDeleted.setContentText("All notes were deleted");
+            allNotesDeleted.hideConfirmButton();
+            allNotesDeleted.show();
+
+            handler.postDelayed(new Runnable() {
+                public void run() {
+                    allNotesDeleted.dismiss();
+                }
+            }, timeToHideDialogs);
+            //End SweetAlert New Note Added
+
         }
         return true;
     }
@@ -124,21 +165,48 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
 
             noteViewModel.insert(new Note(note_title, note_description, note_priority, note_icon));
 
-            Toast.makeText(this, R.string.txtNoteSaved, Toast.LENGTH_SHORT).show();
+            //SweetAlert New Note Added
+            final SweetAlertDialog noteAddedDialog = new SweetAlertDialog(NoteActivity.this, SweetAlertDialog.SUCCESS_TYPE);
+            noteAddedDialog.setTitleText("New Note added");
+            noteAddedDialog.setContentText("The note was stored");
+            noteAddedDialog.hideConfirmButton();
+            noteAddedDialog.show();
+
+            handler.postDelayed(new Runnable() {
+                public void run() {
+                    noteAddedDialog.dismiss();
+                }
+            }, timeToHideDialogs);
+            //End SweetAlert New Note Added
+
         } else if (requestCode == EDIT_REQUEST && resultCode == RESULT_OK) {
             String note_title = data.getStringExtra("note_title");
             String note_description = data.getStringExtra("note_description");
             int note_priority = data.getIntExtra("note_priority", 0);
             int note_id = data.getIntExtra("id", 0);
 
-
             Note note = new Note(note_title, note_description, note_priority, note_icon);
             note.setId(note_id);
             noteViewModel.update(note);
 
-            Toast.makeText(this, R.string.txtNoteUpdated, Toast.LENGTH_SHORT).show();
+            //SweetAlert Note Updated
+            final SweetAlertDialog noteUpdatedDialog = new SweetAlertDialog(NoteActivity.this, SweetAlertDialog.SUCCESS_TYPE);
+            noteUpdatedDialog.setTitleText("Note updated");
+            noteUpdatedDialog.setContentText("The note was updated");
+            noteUpdatedDialog.hideConfirmButton();
+            noteUpdatedDialog.show();
+
+            handler.postDelayed(new Runnable() {
+                public void run() {
+                    noteUpdatedDialog.dismiss();
+                }
+            }, timeToHideDialogs);
+
         } else {
-            Toast.makeText(this, R.string.txtNoteNotSaved, Toast.LENGTH_SHORT).show();
+            new SweetAlertDialog(NoteActivity.this, SweetAlertDialog.SUCCESS_TYPE)
+                    .setTitleText("Note not saved")
+                    .setContentText("The note was NOT saved")
+                    .show();
         }
     }
 

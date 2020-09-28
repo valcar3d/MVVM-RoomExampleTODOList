@@ -5,10 +5,8 @@ import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
 
-
 import com.example.android.todo_list.databases.AppDatabase;
 import com.example.android.todo_list.databases.dao.NoteDao;
-import com.example.android.todo_list.databases.NoteDatabase;
 import com.example.android.todo_list.entity.Note;
 
 import java.util.List;

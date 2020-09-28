@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
@@ -14,6 +15,8 @@ import com.example.android.todo_list.databinding.ActivityLoginBinding;
 import com.example.android.todo_list.databinding.Listener;
 import com.example.android.todo_list.entity.UserAccount;
 import com.example.android.todo_list.viewmodels.UserViewModel;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class LoginActivity extends AppCompatActivity implements Listener {
 
@@ -41,9 +44,9 @@ public class LoginActivity extends AppCompatActivity implements Listener {
         UserAccount data = new UserAccount();
 
         if (TextUtils.isEmpty(strEmail)) {
-            binding.username.setError("Please a valid E-mail Address");
+            binding.username.setError("Please write a valid E-mail Address");
         } else if (TextUtils.isEmpty(strPassword)) {
-            binding.password.setError("Please Enter a Password");
+            binding.password.setError("Please write a Password");
         } else {
 
             data.setUserName(strEmail);
@@ -53,12 +56,21 @@ public class LoginActivity extends AppCompatActivity implements Listener {
 
             if (itExists != null) {
                 if (itExists.getUserName().equals(data.getUserName())) {
-                    Toast.makeText(getApplicationContext(), "User already taken, please use another", Toast.LENGTH_SHORT).show();
+
+                    new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+                            .setTitleText("Username taken")
+                            .setContentText("User already taken, please use another")
+                            .setConfirmText("Got it")
+                            .show();
                 }
             } else {
 
                 userViewModel.insert(data);
-                Toast.makeText(getApplicationContext(), "User added, you can login", Toast.LENGTH_SHORT).show();
+
+                new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
+                        .setTitleText("New User added")
+                        .setContentText("you can login now with your newly created credentials")
+                        .show();
 
                 binding.username.setText("");
                 binding.password.setText("");
@@ -77,9 +89,9 @@ public class LoginActivity extends AppCompatActivity implements Listener {
         UserAccount data = new UserAccount();
 
         if (TextUtils.isEmpty(strEmail)) {
-            binding.username.setError("Please Enter Your E-mail Address");
+            binding.username.setError("Please write a valid E-mail Address");
         } else if (TextUtils.isEmpty(strPassword)) {
-            binding.password.setError("Please Enter Your Password");
+            binding.password.setError("Please write a Password");
         } else {
 
             boolean isValid = userViewModel.checkValidLogin(strEmail, strPassword);
@@ -89,19 +101,36 @@ public class LoginActivity extends AppCompatActivity implements Listener {
                 data.setUserName(strEmail);
                 data.setPassword(strPassword);
 
-                Toast.makeText(getBaseContext(), "Successfully Logged In!", Toast.LENGTH_LONG).show();
+
                 binding.username.setText("");
                 binding.password.setText("");
 
-                UserAccount userId = userViewModel.getUserId(data);
+                final UserAccount userId = userViewModel.getUserId(data);
+                final Intent intent = new Intent(this, NoteActivity.class);
 
-                Intent intent = new Intent(this, NoteActivity.class);
+                new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
+                        .setTitleText("Welcome "+strEmail)
+                        .hideConfirmButton()
+                        .show();
 
-                startActivity(intent);
-                finish();
+
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+
+                        intent.putExtra("userId", userId.getUserId());
+                        intent.putExtra("userName", userId.getUserName());
+                        startActivity(intent);
+                        finish();
+                    }
+                }, 1000);
 
             } else {
-                Toast.makeText(getBaseContext(), "Invalid Login!", Toast.LENGTH_SHORT).show();
+
+                new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+                        .setTitleText("Error")
+                        .setContentText("Your Email or Password are incorrect, try again")
+                        .show();
             }
         }
 

@@ -30,6 +30,4 @@ public interface NoteDao {
     LiveData<List<Note>> getAllNotes();
 
 
-
-
 }

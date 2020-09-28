@@ -11,7 +11,6 @@ import com.example.android.todo_list.entity.UserAccount;
 
 public class UserRepository {
 
-
     private UserAccountDao userAccountDao;
     private LiveData<UserAccount> allData;
 
@@ -66,9 +65,6 @@ public class UserRepository {
             return null;
         }
     }
-
-
-
 
 }
 
