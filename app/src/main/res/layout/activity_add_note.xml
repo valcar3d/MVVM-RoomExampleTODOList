@@ -1,52 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     android:background="@color/material_blue_grey_90"
     tools:context=".views.AddEditNoteActivity">
 
-    <RelativeLayout
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="118dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="118dp"
+        android:paddingBottom="50dp"
+        android:text="Add a new note"
+        android:textColor="@color/blue_btn_bg_pressed_color"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/addNoteActivity_title"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="10dp">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:hint="Title"
+        android:textColor="@color/button_text_color"
+        android:textColorHint="@color/blue_btn_bg_pressed_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
-        <EditText
-            android:id="@+id/addNoteActivity_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Title"
-            android:textColor="@color/button_text_color"
-            android:textColorHint="@color/blue_btn_bg_pressed_color" />
+    <EditText
+        android:id="@+id/addNoteActivity_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/addNoteActivity_title"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="50dp"
+        android:hint="Description"
+        android:textColor="@color/button_text_color"
+        android:textColorHint="@color/blue_btn_bg_pressed_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addNoteActivity_title" />
 
-        <EditText
-            android:id="@+id/addNoteActivity_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/addNoteActivity_title"
-            android:hint="Description"
-            android:textColor="@color/button_text_color"
-            android:textColorHint="@color/blue_btn_bg_pressed_color" />
+    <TextView
+        android:id="@+id/addNote_item_priority"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/addNoteActivity_description"
+        android:text="Priority"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/button_text_color"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/addNote_numberPacker"
+        app:layout_constraintEnd_toStartOf="@+id/addNote_numberPacker"
+        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/addNote_numberPacker" />
 
-        <TextView
-            android:id="@+id/addNote_item_priority"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/addNoteActivity_description"
-            android:layout_marginTop="8dp"
-            android:text="Priority"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="@color/button_text_color" />
+    <NumberPicker
+        android:id="@+id/addNote_numberPacker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/addNote_item_priority"
+        android:layout_marginTop="50dp"
+        android:theme="@style/AppTheme.Picker"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addNoteActivity_description">
 
-        <NumberPicker
-            android:id="@+id/addNote_numberPacker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/addNote_item_priority"
-            android:layout_marginTop="5dp"
-            android:theme="@style/AppTheme.Picker">
+    </NumberPicker>
 
-        </NumberPicker>
-    </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

@@ -8,7 +8,6 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.android.todo_list.R;
 import com.example.android.todo_list.databinding.ActivityLoginBinding;
@@ -108,10 +107,10 @@ public class LoginActivity extends AppCompatActivity implements Listener {
                 final UserAccount userId = userViewModel.getUserId(data);
                 final Intent intent = new Intent(this, NoteActivity.class);
 
-                new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
-                        .setTitleText("Welcome "+strEmail)
-                        .hideConfirmButton()
-                        .show();
+                final SweetAlertDialog alertSuccessLogin = new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE);
+                alertSuccessLogin.setTitleText("Welcome " + strEmail);
+                alertSuccessLogin.hideConfirmButton();
+                alertSuccessLogin.show();
 
 
                 Handler handler = new Handler();
@@ -120,6 +119,7 @@ public class LoginActivity extends AppCompatActivity implements Listener {
 
                         intent.putExtra("userId", userId.getUserId());
                         intent.putExtra("userName", userId.getUserName());
+                        alertSuccessLogin.dismiss();
                         startActivity(intent);
                         finish();
                     }
