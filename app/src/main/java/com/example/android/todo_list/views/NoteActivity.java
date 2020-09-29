@@ -54,8 +54,11 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
         //Toast.makeText(getApplicationContext(), "Used ID = " + userId + " Name = " + userName, Toast.LENGTH_SHORT).show();
 
 
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_note);
         floatingActionButton = findViewById(R.id.noteActivity_floatingButton);
+
+
 
         binding.noteActivityRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.noteActivityRecyclerView.setHasFixedSize(true);
@@ -92,6 +95,8 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
         }).attachToRecyclerView(binding.noteActivityRecyclerView);
         //endregion
 
+
+
         noteViewModel = ViewModelProviders.of(this).get(NoteViewModel.class);
         noteViewModel.getAllNotes().observe(this, new Observer<List<Note>>() {
             @Override
@@ -105,7 +110,6 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
         floatingActionButton.setOnClickListener(this);
         noteAdapter.setOnClickRecyclerview(this);
     }
-
 
     //region menu configurations
     @Override
@@ -163,7 +167,10 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
             String note_description = data.getStringExtra("note_description");
             int note_priority = data.getIntExtra("note_priority", 0);
 
-            noteViewModel.insert(new Note(note_title, note_description, note_priority, note_icon));
+            boolean note_done = data.getBooleanExtra("note_done", false);
+
+
+            noteViewModel.insert(new Note(note_title, note_description, note_priority, note_icon, note_done));
 
             //SweetAlert New Note Added
             final SweetAlertDialog noteAddedDialog = new SweetAlertDialog(NoteActivity.this, SweetAlertDialog.SUCCESS_TYPE);
@@ -185,7 +192,7 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
             int note_priority = data.getIntExtra("note_priority", 0);
             int note_id = data.getIntExtra("id", 0);
 
-            Note note = new Note(note_title, note_description, note_priority, note_icon);
+            Note note = new Note(note_title, note_description, note_priority, note_icon, false);
             note.setId(note_id);
             noteViewModel.update(note);
 
@@ -219,6 +226,7 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
         intent.putExtra("title", note.getTitle());
         intent.putExtra("description", note.getDescription());
         intent.putExtra("priority", note.getPriority());
+        intent.putExtra("checked", note.isCheckedTodo());
         startActivityForResult(intent, EDIT_REQUEST);
     }
 

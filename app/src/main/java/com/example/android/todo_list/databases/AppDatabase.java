@@ -1,9 +1,12 @@
 package com.example.android.todo_list.databases;
 
+import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
+import android.os.AsyncTask;
+import android.support.annotation.NonNull;
 
 import com.example.android.todo_list.databases.dao.NoteDao;
 import com.example.android.todo_list.databases.dao.UserAccountDao;
@@ -29,34 +32,11 @@ public abstract class AppDatabase extends RoomDatabase {
         if (instance == null) {
             instance = Room.databaseBuilder(context, AppDatabase.class, NOTE_DATABASE).allowMainThreadQueries()
                     .fallbackToDestructiveMigration()
-                    //.addCallback(roomCallback)
                     .build();
         }
         return instance;
     }
     //endregion
-
-
-    //Create default data for ADMIN credentials in database
- /*   private static RoomDatabase.Callback roomCallback = new RoomDatabase.Callback() {
-        @Override
-        public void onCreate(@NonNull SupportSQLiteDatabase db) {
-            super.onCreate(db);
-            new NoteDatabase.PopulateDbAsyncTask(instance).execute();
-        }
-    };
-    private static class PopulateDbAsyncTask extends AsyncTask<Void, Void, Void> {
-        private NoteDatabase noteDao;
-        private PopulateDbAsyncTask(NoteDatabase db) {
-            noteDao = db.noteDao();
-        }
-        @Override
-        protected Void doInBackground(Void... voids) {
-            userDao.insert(new User("admin@mail.com", "admin123"));
-            return null;
-        }
-    }*/
-
 
 
 }

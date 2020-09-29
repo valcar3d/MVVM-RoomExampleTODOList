@@ -94,12 +94,9 @@ public class LoginActivity extends AppCompatActivity implements Listener {
         } else {
 
             boolean isValid = userViewModel.checkValidLogin(strEmail, strPassword);
-
-
             if (isValid) {
                 data.setUserName(strEmail);
                 data.setPassword(strPassword);
-
 
                 binding.username.setText("");
                 binding.password.setText("");

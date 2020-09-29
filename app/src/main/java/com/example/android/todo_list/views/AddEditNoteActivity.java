@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.NumberPicker;
 
@@ -15,6 +16,7 @@ public class AddEditNoteActivity extends AppCompatActivity {
     EditText title;
     EditText description;
     NumberPicker numberPicker;
+    CheckBox checkBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,7 @@ public class AddEditNoteActivity extends AppCompatActivity {
         numberPicker = findViewById(R.id.addNote_numberPacker);
         numberPicker.setMaxValue(10);
         numberPicker.setMinValue(1);
+        checkBox = findViewById(R.id.doneCheckbox);
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow);
 
@@ -61,10 +64,13 @@ public class AddEditNoteActivity extends AppCompatActivity {
         String note_description = description.getText().toString();
         int note_priority = numberPicker.getValue();
 
+
         Intent intent = new Intent();
         intent.putExtra("note_title", note_title);
         intent.putExtra("note_description", note_description);
         intent.putExtra("note_priority", note_priority);
+        intent.putExtra("note_done", false);
+
         int id = getIntent().getIntExtra("id",-1);
         if (id != -1){
             intent.putExtra("id",id);

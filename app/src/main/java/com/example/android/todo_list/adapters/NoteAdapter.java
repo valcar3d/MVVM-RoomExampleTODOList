@@ -90,6 +90,7 @@ public class NoteAdapter extends ListAdapter<Note, NoteAdapter.ViewHolder> {
         }
 
     }
+
     //endregion
 
 }
