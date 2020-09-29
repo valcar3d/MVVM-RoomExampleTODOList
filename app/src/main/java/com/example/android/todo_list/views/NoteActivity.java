@@ -57,10 +57,8 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
         //Toast.makeText(getApplicationContext(), "Used ID = " + userId + " Name = " + userName, Toast.LENGTH_SHORT).show();
 
 
-
         binding = DataBindingUtil.setContentView(this, R.layout.activity_note);
         floatingActionButton = findViewById(R.id.noteActivity_floatingButton);
-
 
 
         binding.noteActivityRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -97,7 +95,6 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
             }
         }).attachToRecyclerView(binding.noteActivityRecyclerView);
         //endregion
-
 
 
         noteViewModel = ViewModelProviders.of(this).get(NoteViewModel.class);
@@ -141,6 +138,12 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
             }, timeToHideDialogs);
             //End SweetAlert New Note Added
 
+        }
+
+        if (id == R.id.logout) {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            finish();
         }
         return true;
     }
