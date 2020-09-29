@@ -16,7 +16,6 @@ public class AddEditNoteActivity extends AppCompatActivity {
     EditText title;
     EditText description;
     NumberPicker numberPicker;
-    CheckBox checkBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +28,7 @@ public class AddEditNoteActivity extends AppCompatActivity {
         numberPicker = findViewById(R.id.addNote_numberPacker);
         numberPicker.setMaxValue(10);
         numberPicker.setMinValue(1);
-        checkBox = findViewById(R.id.doneCheckbox);
+
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow);
 

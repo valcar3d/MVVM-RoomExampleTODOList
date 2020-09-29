@@ -25,7 +25,10 @@ import com.example.android.todo_list.databinding.ActivityNoteBinding;
 import com.example.android.todo_list.entity.Note;
 import com.example.android.todo_list.viewmodels.NoteViewModel;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -166,11 +169,17 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
             String note_title = data.getStringExtra("note_title");
             String note_description = data.getStringExtra("note_description");
             int note_priority = data.getIntExtra("note_priority", 0);
+            note_priority = data.getIntExtra("note_priority", 0);
+
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+            String currentDateandTime = sdf.format(new Date());
+
+            String currentDate = currentDateandTime;
 
             boolean note_done = data.getBooleanExtra("note_done", false);
 
 
-            noteViewModel.insert(new Note(note_title, note_description, note_priority, note_icon, note_done));
+            noteViewModel.insert(new Note(note_title, note_description, note_priority, note_icon, note_done, currentDate));
 
             //SweetAlert New Note Added
             final SweetAlertDialog noteAddedDialog = new SweetAlertDialog(NoteActivity.this, SweetAlertDialog.SUCCESS_TYPE);
@@ -192,7 +201,12 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
             int note_priority = data.getIntExtra("note_priority", 0);
             int note_id = data.getIntExtra("id", 0);
 
-            Note note = new Note(note_title, note_description, note_priority, note_icon, false);
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+            String currentDateandTime = sdf.format(new Date());
+
+            String currentDate = currentDateandTime;
+
+            Note note = new Note(note_title, note_description, note_priority, note_icon, false, currentDate);
             note.setId(note_id);
             noteViewModel.update(note);
 

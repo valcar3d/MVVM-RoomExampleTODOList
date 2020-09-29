@@ -18,16 +18,28 @@ public class Note {
     int priority;
     private int image;
     private boolean checkedTodo;
-    private String checkedMessage;
+
+    private String createdDate;
+
 
     //constructor to allow new implementations of the notes icons
     //we can fetch them from anywhere not only from the resources
-    public Note(String title, String description, int priority, int image, boolean checkedTodo) {
+ /*   public Note(String title, String description, int priority, int image, boolean checkedTodo) {
         this.title = title;
         this.description = description;
         this.priority = priority;
         this.image = image;
         this.checkedTodo = checkedTodo;
+    }*/
+
+    public Note(String title, String description, int priority, int image, boolean checkedTodo, String createdDate) {
+        this.title = title;
+        this.description = description;
+        this.priority = priority;
+        this.image = image;
+        this.checkedTodo = checkedTodo;
+
+        this.createdDate = createdDate;
     }
 
     //region Getters and Setters
@@ -74,12 +86,13 @@ public class Note {
         this.checkedTodo = checkedTodo;
     }
 
-    public String getCheckedMessage() {
-        return checkedMessage;
+    public String getCreatedDate() {
+        return createdDate;
     }
-    public void setCheckedMessage(String checkedMessage) {
-        this.checkedMessage = checkedMessage;
+    public void setCreatedDate(String createdDate) {
+        this.createdDate = createdDate;
     }
+
 
     //endregion
 }
